@@ -17,8 +17,6 @@ export default function App() {
         <Stack.Screen name='Model' component={ModelScreen} />
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Sobre' component={AboutScreen} />
-        <Stack.Screen name='GeneralQuiz' component={GeneralQuizScreen} />
-        <Stack.Screen name='Desenhos' component={DesenhosScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
