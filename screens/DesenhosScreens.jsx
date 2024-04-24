@@ -7,19 +7,24 @@ export default function DesenhosScreen() {
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0); // Estado para armazenar a pontuação
+  const [quizCompleted, setQuizCompleted] = useState(false); // Estado para verificar se o quiz foi concluído
 
   const handleAnswer = (selectedOption) => {
     if (selectedOption === reactQuestions[currentQuestionIndex].correctAnswer) {
       setCorrectAnswer(true);
-      setScore(score + 1); // Aumenta a pontuação se a resposta estiver correta
+      setScore(score + 1); // Incrementa a pontuação se a resposta estiver correta
     } else {
       setCorrectAnswer(false);
     }
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setCorrectAnswer(null); // Reset correctAnswer state
+    if (currentQuestionIndex === reactQuestions.length - 1) {
+      setQuizCompleted(true); // Define quizCompleted como true quando todas as perguntas forem respondidas
+    } else {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCorrectAnswer(null); // Reseta o estado da resposta correta
+    }
   };
 
   return (
@@ -41,13 +46,15 @@ export default function DesenhosScreen() {
           </Pressable>
         </View>
       ))}
-      <Text style={styles.score}>Acertos: {score}</Text> {/* Exibe a pontuação */}
-      {currentQuestionIndex < reactQuestions.length - 1 ? (
-        <Pressable style={styles.buttonNext} onPress={handleNext}>
-          <Text style={styles.text}>Next</Text>
-        </Pressable>
-      ) : (
+      {quizCompleted ? (
         <Text style={styles.score}>Quiz completo! Sua pontuação final é: {score}</Text>
+      ) : (
+        <View>
+          <Text style={styles.score}>Pontuação: {score} de {reactQuestions.length}</Text>
+          <Pressable style={styles.buttonNext} onPress={handleNext}>
+            <Text style={styles.text}>Next</Text>
+          </Pressable>
+        </View>
       )}
     </View>
   );
