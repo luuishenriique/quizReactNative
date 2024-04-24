@@ -41,7 +41,7 @@ export default function DesenhosScreen() {
           </Pressable>
         </View>
       ))}
-      <Text style={styles.score}>Score: {score}</Text> {/* Exibe a pontuação */}
+      <Text style={styles.score}>Acertos: {score}</Text> {/* Exibe a pontuação */}
       {currentQuestionIndex < reactQuestions.length - 1 ? (
         <Pressable style={styles.buttonNext} onPress={handleNext}>
           <Text style={styles.text}>Next</Text>
